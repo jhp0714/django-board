@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pybo', '0008_auto_20241227_0132'),
+        ('board', '0008_auto_20241227_0132'),
     ]
 
     operations = [

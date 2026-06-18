@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load pybo_filter %}
+{% load board_filter %}
 {% block content %}
 <div class="container my-3">
     <h4 class="border-bottom pb-2 my-3">{{ profile_user.username }}</h4>
@@ -48,7 +48,7 @@
                 {% endif %}
             </td>
             <td class="text-left">
-                <a href="{% url 'pybo:detail' object.id %}">
+                <a href="{% url 'board:detail' object.id %}">
                     {{ object.subject }}
                     {% if object.answer_set.count > 0 %}
                     <span class="text-danger small ml-2">
@@ -145,7 +145,7 @@
         {% endif %}
     </ul>
     <!-- 페이징 처리 끝 -->
-    <a href="{% url 'pybo:question_create' %}" class="btn btn-primary">질문 등록하기</a>
+    <a href="{% url 'board:question_create' %}" class="btn btn-primary">질문 등록하기</a>
 </div>
 <form id="searchForm" method="get" action="">
     <input type="hidden" id="page" name="page" value="{{ page }}">

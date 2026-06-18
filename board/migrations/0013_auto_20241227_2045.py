@@ -7,13 +7,13 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('pybo', '0012_auto_20241227_0153'),
+        ('board', '0012_auto_20241227_0153'),
     ]
 
     operations = [
         migrations.AlterField(
             model_name='question',
             name='category',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='category_question', to='pybo.category'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='category_question', to='board.category'),
         ),
     ]

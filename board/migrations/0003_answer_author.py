@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('pybo', '0002_question_author'),
+        ('board', '0002_question_author'),
     ]
 
     operations = [

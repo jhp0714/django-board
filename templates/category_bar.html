@@ -7,7 +7,7 @@
             {% for category in categories %}
                 <tr class="{% if category == current_category %}table-highlight{% endif %}">
                     <td>
-                        <a href="{% url 'pybo:index' category.name %}">{{ category.description }}</a>
+                        <a href="{% url 'board:index' category.name %}">{{ category.description }}</a>
                     </td>
                 </tr>
             {% endfor %}

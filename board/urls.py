@@ -1,7 +1,7 @@
 from django.urls import path
 from .views  import base_views, question_views, answer_views, comment_views, vote_views, recently_views
 
-app_name = 'pybo'
+app_name = 'board'
 
 urlpatterns = [
     # base_views.py

@@ -1,14 +1,14 @@
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class="nav-link {% if recently_type == 'question' %}active{% endif %}"
-           href="{% url 'pybo:recently_question' %}">최근 질문</a>
+           href="{% url 'board:recently_question' %}">최근 질문</a>
     </li>
     <li class="nav-item">
         <a class="nav-link {% if recently_type == 'answer' %}active{% endif %}"
-           href="{% url 'pybo:recently_answer' %}">최근 답변</a>
+           href="{% url 'board:recently_answer' %}">최근 답변</a>
     </li>
     <li class="nav-item">
         <a class="nav-link {% if recently_type == 'comment' %}active{% endif %}"
-           href="{% url 'pybo:recently_comment' %}">최근 댓글</a>
+           href="{% url 'board:recently_comment' %}">최근 댓글</a>
     </li>
 </ul>

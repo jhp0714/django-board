@@ -33,7 +33,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'common.apps.CommonConfig',
-    'pybo.apps.PyboConfig',
+    'board.apps.BoardConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -86,7 +86,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'pybo.context_processors.category_list',  # 여기 추가
+                'board.context_processors.category_list',  # 여기 추가
             ],
         },
     },
@@ -148,9 +148,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # 로그인 로그아웃 성공 시 자동으로 이동할 URL
-LOGIN_REDIRECT_URL = '/pybo/'
-LOGOUT_REDIRECT_URL = '/pybo/'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/pybo/'
+LOGIN_REDIRECT_URL = '/board/'
+LOGOUT_REDIRECT_URL = '/board/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/board/'
 
 # 이메일 설정
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -163,31 +163,31 @@ EMAIL_HOST_PASSWORD = 'iydg fxrn agmq uojn'  # Gmail 계정 비밀번호 또는 
 
 
 # 소셜 로그인 제공자 설정
-SOCIALACCOUNT_PROVIDERS = {
-    # 카카오 설정
-    'kakao':{
-        'APP':{
-            'client_id':'0af7abb46c43e88acd9bd6beec39364d',
-            'key':'',
-        }
-    },
-    # 구글 설정
-    'google': {
-        'APP': {
-            'client_id' : '1055637909071-sb05kqh9l9m1rjd5c8g9quqloc4nc8ls.apps.googleusercontent.com',
-            'secret':'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',
-        },
-        'SCOPE': ['profile', 'email'],
-        'AUTH_PARAMS': {'access_type': 'online'},
-    },
-    # 네이버 설정
-    'naver': {
-        'APP': {
-            'client_id': 'kgs2dUVCKD7pdtlsMOyx',
-            'secret': '6hrkKeROyt',
-        },
-    },
-}
+# SOCIALACCOUNT_PROVIDERS = {
+#     # 카카오 설정
+#     'kakao':{
+#         'APP':{
+#             'client_id':'0af7abb46c43e88acd9bd6beec39364d',
+#             'key':'',
+#         }
+#     },
+#     # 구글 설정
+#     'google': {
+#         'APP': {
+#             'client_id' : 'GOOGLE_CLIENT_ID',
+#             'secret':'GOOGLE_CLIENT_SECRET',
+#         },
+#         'SCOPE': ['profile', 'email'],
+#         'AUTH_PARAMS': {'access_type': 'online'},
+#     },
+#     # 네이버 설정
+#     'naver': {
+#         'APP': {
+#             'client_id': 'kgs2dUVCKD7pdtlsMOyx',
+#             'secret': '6hrkKeROyt',
+#         },
+#     },
+# }
 
 # 로깅 설정
 LOGGING = {
@@ -247,7 +247,7 @@ LOGGING = {
             'level': 'INFO',
             'propagate': False,
         },
-        'pybo': {
+        'board': {
             'handlers': ['console', 'file'],
             'level': 'INFO',
         },

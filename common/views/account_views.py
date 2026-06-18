@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from common.forms import UserForm, PasswordResetForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
-from pybo.models import Question, Answer, Comment
+from board.models import Question, Answer, Comment
 
 def signup(request):
     """

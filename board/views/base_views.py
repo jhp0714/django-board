@@ -3,11 +3,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q, Count
 from ..models import Question, Answer, Category
 import logging
-logger = logging.getLogger('pybo')
+logger = logging.getLogger('board')
 
 def index(request, category_name='qna'):
     """
-    pybo 목록 출력
+    board 목록 출력
     """
     logger.info("INFO 레벨로 출력")
     # 입력 인자
@@ -51,12 +51,12 @@ def index(request, category_name='qna'):
         'so':so,
         'current_category' : category
     }
-    return render(request, 'pybo/question_list.html', context)
+    return render(request, 'board/question_list.html', context)
 
 
 def detail(request, question_id):
     """
-    pybo 내용 출력
+    board 내용 출력
     """
     question = get_object_or_404(Question, pk = question_id)
     question.update_hits()      # 조회수 업데이트
@@ -85,10 +85,10 @@ def detail(request, question_id):
         'so':so,
         'current_category':category
     }
-    return render(request, 'pybo/question_detail.html', context)
+    return render(request, 'board/question_detail.html', context)
 
 def redirect_to_question(request):
     """
-    pybo/에 접속하면 pybo/question/으로 리디렉션
+    board/에 접속하면 board/question/으로 리디렉션
     """
-    return redirect('pybo:index', category_name='qna')
+    return redirect('board:index', category_name='qna')

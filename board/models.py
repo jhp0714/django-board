@@ -12,7 +12,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('pybo:index', args=[self.name])
+        return reverse('board:index', args=[self.name])
 
 class Question(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE,

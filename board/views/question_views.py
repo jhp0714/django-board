@@ -9,7 +9,7 @@ from ..models import Question, Category
 @login_required(login_url='common:login')
 def question_create(request):
     """
-    pybo 질문 등록
+    board 질문 등록
     """
     if request.method == 'POST':
         form = QuestionForm(request.POST)
@@ -18,22 +18,22 @@ def question_create(request):
             question.author = request.user
             question.create_date = timezone.now()
             question.save()
-            return redirect('pybo:index', category_name=question.category.name)
+            return redirect('board:index', category_name=question.category.name)
     else:   # request.method == 'GET' 인 경우
         form = QuestionForm()
     categories = Category.objects.all()  # 모든 카테고리 가져오기
     context = {'form' : form, 'categories' : categories}
-    return render(request, 'pybo/question_form.html', context)
+    return render(request, 'board/question_form.html', context)
 
 @login_required(login_url='common:login')
 def question_modify(request, question_id):
     """
-    pybo 질문 수정
+    board 질문 수정
     """
     question = get_object_or_404(Question, pk=question_id)
     if request.user != question.author:
         messages.error(request, '수정권한이 없습니다.')
-        return redirect('pybo:detail', question_id=question.id)
+        return redirect('board:detail', question_id=question.id)
 
     if request.method == 'POST':
         form = QuestionForm(request.POST, instance=question)
@@ -42,21 +42,21 @@ def question_modify(request, question_id):
             question.author =request.user
             question.modify_date = timezone.now()
             question.save()
-            return redirect('pybo:detail', question_id=question.id)
+            return redirect('board:detail', question_id=question.id)
     else:
         form = QuestionForm(instance=question)
     categories = Category.objects.all()  # 모든 카테고리 가져오기
     context = {'form' : form, 'categories' : categories}
-    return render(request, 'pybo/question_form.html', context)
+    return render(request, 'board/question_form.html', context)
 
 @login_required(login_url='common:login')
 def question_delete(request, question_id):
     """
-    pybo 질문 삭제
+    board 질문 삭제
     """
     question = get_object_or_404(Question, pk=question_id)
     if request.user != question.author:
         messages.error(request, '삭제 권한이 없습니다.')
-        return redirect('pybo:detail', question_id=question.id)
+        return redirect('board:detail', question_id=question.id)
     question.delete()
-    return redirect('pybo:index', category_name=question.category.name)
+    return redirect('board:index', category_name=question.category.name)

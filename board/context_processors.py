@@ -1,4 +1,4 @@
-# pybo/context_processors.py
+# board/context_processors.py
 from .models import Category
 
 def category_list(request):

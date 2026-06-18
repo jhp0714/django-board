@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load pybo_filter %}
+{% load board_filter %}
 {% block content %}
 <div class="container my-3">
     <h4 class="border-bottom pb-2 my-3">최근 게시물</h4>
@@ -28,7 +28,7 @@
                 {% endif %}
             </td>
             <td class="text-left">
-                <a href="{% url 'pybo:detail' object.question.id %}#answer_{{ object.id }}">
+                <a href="{% url 'board:detail' object.question.id %}#answer_{{ object.id }}">
                     {{ object.content|slice:":75" }}{% if object.content|length > 75 %}...{% endif %}
                 </a>
             </td>

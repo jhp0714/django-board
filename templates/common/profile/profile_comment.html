@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load pybo_filter %}
+{% load board_filter %}
 {% block content %}
 <div class="container my-3">
     <h4 class="border-bottom pb-2 my-3">{{ profile_user.username }}</h4>
@@ -28,7 +28,7 @@
                 <td>답변</td>
             {% endif %}
             <td class="text-left">
-                <a href="{% if object.question.id %}{% url 'pybo:detail' object.question.id %}{% else %}{% url 'pybo:detail' object.id %}{% endif %}#comment_{{ object.id }}">
+                <a href="{% if object.question.id %}{% url 'board:detail' object.question.id %}{% else %}{% url 'board:detail' object.id %}{% endif %}#comment_{{ object.id }}">
                     {{ object.content|slice:":100" }}{% if object.content|length > 100 %}...{% endif %}
                 </a>
             </td>

@@ -1,6 +1,6 @@
 <!-- 내비게이션바 -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
-    <a class="navbar-brand" href="{% url 'pybo:redirect_to_question' %}">Pybo</a>
+    <a class="navbar-brand" href="{% url 'board:redirect_to_question' %}">Pybo</a>
     <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse"
             data-target="#navbarNav" aria-controls="navbarNav"
             aria-expanded="false" aria-label="Toggle navigation">
@@ -14,7 +14,7 @@
             <li class="nav-item d-flex align-items-center">
                 {% if user.is_authenticated %}
                 <span class="nav_link">
-                    <a class="nav-link" href="{% url 'pybo:recently_question' %}">최근</a>
+                    <a class="nav-link" href="{% url 'board:recently_question' %}">최근</a>
                 </span>
                 <span class="nav-link">
                     <a class="nav-link" href="{% url 'common:profile_base' user.id %}"> {{ user.username }}</a>

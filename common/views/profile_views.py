@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView
 from itertools import chain
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from pybo.models import Question, Answer, Comment
+from board.models import Question, Answer, Comment
 from django.http import JsonResponse
 
 import logging
