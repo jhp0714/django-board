@@ -23,8 +23,10 @@ load_dotenv(BASE_DIR / ".env")
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '123'
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 
+if not SECRET_KEY:
+    raise RuntimeError("DJANGO_SECRET_KEY 환경변수가 설정되지 않았습니다.")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -155,41 +157,41 @@ LOGOUT_REDIRECT_URL = '/board/'
 ACCOUNT_LOGOUT_REDIRECT_URL = '/board/'
 
 # 이메일 설정
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.gmail.com'  # Gmail SMTP 서버
-EMAIL_PORT = 587  # TLS 사용 시 587
-EMAIL_USE_TLS = True  # TLS 사용
-EMAIL_USE_SSL = False  # SSL 비활성화
-EMAIL_HOST_USER = 'gowns171@gmail.com'  # Gmail 계정
-EMAIL_HOST_PASSWORD = 'iydg fxrn agmq uojn'  # Gmail 계정 비밀번호 또는 앱 비밀번호
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
 
 
 # 소셜 로그인 제공자 설정
-# SOCIALACCOUNT_PROVIDERS = {
-#     # 카카오 설정
-#     'kakao':{
-#         'APP':{
-#             'client_id':'0af7abb46c43e88acd9bd6beec39364d',
-#             'key':'',
-#         }
-#     },
-#     # 구글 설정
-#     'google': {
-#         'APP': {
-#             'client_id' : 'GOOGLE_CLIENT_ID',
-#             'secret':'GOOGLE_CLIENT_SECRET',
-#         },
-#         'SCOPE': ['profile', 'email'],
-#         'AUTH_PARAMS': {'access_type': 'online'},
-#     },
-#     # 네이버 설정
-#     'naver': {
-#         'APP': {
-#             'client_id': 'kgs2dUVCKD7pdtlsMOyx',
-#             'secret': '6hrkKeROyt',
-#         },
-#     },
-# }
+SOCIALACCOUNT_PROVIDERS = {
+    "google": {
+        "APP": {
+            "client_id": os.environ.get("GOOGLE_CLIENT_ID"),
+            "secret": os.environ.get("GOOGLE_CLIENT_SECRET"),
+            "key": "",
+        },
+        "SCOPE": ["profile", "email"],
+        "AUTH_PARAMS": {"access_type": "online"},
+    },
+    "kakao": {
+        "APP": {
+            "client_id": os.environ.get("KAKAO_CLIENT_ID"),
+            "secret": os.environ.get("KAKAO_CLIENT_SECRET"),
+            "key": "",
+        }
+    },
+    "naver": {
+        "APP": {
+            "client_id": os.environ.get("NAVER_CLIENT_ID"),
+            "secret": os.environ.get("NAVER_CLIENT_SECRET"),
+            "key": "",
+        }
+    },
+}
 
 # 로깅 설정
 LOGGING = {
