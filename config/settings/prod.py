@@ -8,10 +8,10 @@ DEBUG = False
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'board',
-        'USER': 'dbmasteruser',
-        'PASSWORD': '6V:0{KMDYx)c6H^G&PdiR{k.*1;EZgd)',
-        'HOST': 'ls-e368986d13304641e3a0698314ca7aec99218605.crskikqoqlis.ap-northeast-2.rds.amazonaws.com',
-        'PORT': '5432',
+        'NAME': os.environ.get('DB_NAME'),
+        'USER': os.environ.get('DB_USER'),
+        'PASSWORD': os.environ.get('DB_PASSWORD'),
+        'HOST': os.environ.get('DB_HOST'),
+        'PORT': os.environ.get('DB_PORT', '5432'),
     }
 }
