@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 
 from ..forms import AnswerForm
 from ..models import Question, Answer
@@ -16,7 +17,7 @@ def answer_create(request, question_id):
         form = AnswerForm(request.POST)
         if form.is_valid():
             answer = form.save(commit=False)
-            answer.author = request.userhtml
+            answer.author = request.user
             answer.create_date = timezone.now()
             answer.question = question
             answer.save()
@@ -52,13 +53,17 @@ def answer_modify(request, answer_id):
     return render(request, 'board/answer_form.html', context)
 
 @login_required(login_url='common:login')
+@require_POST
 def answer_delete(request, answer_id):
     """
     board 답변 삭제
     """
     answer = get_object_or_404(Answer, pk=answer_id)
+    question_id = answer.question.id
+
     if request.user != answer.author:
         messages.error(request, '삭제 권한이 없습니다.')
     else:
         answer.delete()
-    return redirect('board:detail', question_id = answer.question.id)
+
+    return redirect('board:detail', question_id = question_id)

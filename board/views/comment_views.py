@@ -2,6 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect, resolve_url
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 
 from ..forms import CommentForm
 from ..models import Question, Answer, Comment
@@ -52,17 +53,20 @@ def comment_modify_question(request, comment_id):
     return render(request, 'board/comment_form.html', context)
 
 @login_required(login_url='common:login')
+@require_POST
 def comment_delete_question(request, comment_id):
     """
     board 질문 댓글 삭제
     """
     comment = get_object_or_404(Comment, pk=comment_id)
+    question_id = comment.question.id
+
     if request.user != comment.author:
         messages.error(request, '댓글삭제권한이 없습니다.')
-        return redirect('board:detail', question_id=comment.question_id)
     else:
         comment.delete()
-    return redirect('board:detail', question_id=comment.question_id)
+
+    return redirect('board:detail', question_id=question_id)
 
 @login_required(login_url='common:login')
 def comment_create_answer(request, answer_id):
@@ -110,14 +114,17 @@ def comment_modify_answer(request, comment_id):
     return render(request, 'board/comment_form.html', context)
 
 @login_required(login_url='common:login')
+@require_POST
 def comment_delete_answer(request, comment_id):
     """
     board 답글 댓글 삭제
     """
     comment = get_object_or_404(Comment, pk=comment_id)
+    question_id = comment.answer.question.id
+
     if request.user != comment.author:
         messages.error(request, '댓글삭제권한이 없습니다.')
-        return redirect('board:detail', question_id=comment.answer.question.id)
     else:
         comment.delete()
-    return redirect('board:detail', question_id=comment.answer.question.id)
+
+    return redirect('board:detail', question_id=question_id)
