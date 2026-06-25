@@ -45,18 +45,18 @@
         <tr class="text-center">
             <td>{{ question_list.paginator.count|sub:question_list.start_index|sub:forloop.counter0|add:1  }}</td>
             <td>
-                {% if question.voter.all.count > 0 %}
+                {% if question.voter_count > 0 %}
                 <span class="badge badge-warning px-2 py-1">
-                    {{ question.voter.all.count }}
+                    {{ question.voter_count }}
                 </span>
                 {% endif %}
             </td>
             <td class="text-left">
                 <a href="{% url 'board:detail' question.id %}">
                     {{ question.subject }}
-                    {% if question.answer_set.count > 0 %}
+                    {% if question.answer_count > 0 %}
                     <span class="text-danger small ml-2">
-                        {{ question.answer_set.count }}
+                        {{ question.answer_count }}
                     </span>
                     {% endif %}
                 </a>
