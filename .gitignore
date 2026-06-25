@@ -4,3 +4,10 @@ db.sqlite3
 __pycache__
 logs
 .env
+*.sqlite3
+staticfiles/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+htmlcov/
