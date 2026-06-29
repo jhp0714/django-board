@@ -152,9 +152,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # 로그인 로그아웃 성공 시 자동으로 이동할 URL
-LOGIN_REDIRECT_URL = '/board/'
-LOGOUT_REDIRECT_URL = '/board/'
-ACCOUNT_LOGOUT_REDIRECT_URL = '/board/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_REDIRECT_URL = '/'
 
 # 이메일 설정
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
