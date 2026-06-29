@@ -1,8 +1,11 @@
 from .base import *
 
-ALLOWED_HOSTS = ['3.36.39.13', 'boardhj.kro.kr', 'www.boardhj.kro.kr']
-
 DEBUG = False
+
+ALLOWED_HOSTS = os.environ.get(
+    'DJANGO_ALLOWED_HOSTS',
+    ''
+).split(',')
 
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = []
