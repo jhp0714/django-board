@@ -111,4 +111,4 @@ def redirect_to_question(request):
     """
     board/에 접속하면 기본 게시판으로 리디렉션
     """
-    return redirect('board:index', category_name='qna')
+    return redirect('board:index', category_name='free')

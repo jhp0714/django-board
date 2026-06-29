@@ -10,7 +10,7 @@ class BoardViewTests(TestCase):
     def setUp(self):
         self.category = Category.objects.create(
             name='qna',
-            description='질문답변',
+            description='질문게시판',
             has_answer=True,
         )
         self.user = User.objects.create_user(
