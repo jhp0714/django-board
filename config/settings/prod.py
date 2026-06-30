@@ -14,8 +14,11 @@ CSRF_TRUSTED_ORIGINS = [
     if origin.strip()
 ]
 
+STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-STATICFILES_DIRS = []
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+]
 
 DATABASES = {
     'default': {
