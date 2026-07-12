@@ -150,7 +150,7 @@
         {% endif %}
     </ul>
     <!-- 페이징 처리 끝 -->
-    <a href="{% url 'board:question_create' %}" class="btn btn-primary">질문 등록하기</a>
+    <a href="{% url 'board:question_create' %}" class="btn btn-primary">게시글 등록하기</a>
 </div>
 <form id="searchForm" method="get" action="{% url 'board:index' current_category.name %}">
     <input type="hidden" id="kw" name="kw" value="{{ kw|default_if_none:'' }}">
