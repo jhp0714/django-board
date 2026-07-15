@@ -23,9 +23,13 @@
             <label for="category">게시판 선택</label>
             <select class="form-control" name="category" id="category">
                 {% for category in categories %}
-                <option value="{{ category.id }}">{{ category.description }}</option>
+                <option value="{{ category.id }}"
+                        {% if selected_category_id == category.id %}selected{% endif %}>
+                    {{ category.description }}
+                </option>
                 {% endfor %}
             </select>
+
             <label for="subject">제목</label>
             <input type="text" class="form-control" name="subject" id="subject"
                    value="{{ form.subject.value|default_if_none:'' }}">

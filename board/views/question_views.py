@@ -12,18 +12,42 @@ def question_create(request):
     """
     board 질문 등록
     """
-    if request.method == 'POST':
+    if request.method == 'POST' :
+        selected_category_id = request.POST.get('category')
+    else :
+        selected_category_id = request.GET.get('category')
+
+    try :
+        selected_category_id = int(selected_category_id)
+    except (TypeError, ValueError) :
+        selected_category_id = None
+
+    if request.method == 'POST' :
         form = QuestionForm(request.POST)
-        if form.is_valid():
+
+        if form.is_valid() :
             question = form.save(commit=False)
             question.author = request.user
             question.create_date = timezone.now()
             question.save()
+
             return redirect('board:index', category_name=question.category.name)
-    else:   # request.method == 'GET' 인 경우
-        form = QuestionForm()
-    categories = Category.objects.all()  # 모든 카테고리 가져오기
-    context = {'form' : form, 'categories' : categories}
+    else :
+        initial = {}
+
+        if selected_category_id :
+            initial['category'] = selected_category_id
+
+        form = QuestionForm(initial=initial)
+
+    categories = Category.objects.all()
+
+    context = {
+        'form' : form,
+        'categories' : categories,
+        'selected_category_id' : selected_category_id,
+    }
+
     return render(request, 'board/question_form.html', context)
 
 @login_required(login_url='common:login')
@@ -46,8 +70,15 @@ def question_modify(request, question_id):
             return redirect('board:detail', question_id=question.id)
     else:
         form = QuestionForm(instance=question)
-    categories = Category.objects.all()  # 모든 카테고리 가져오기
-    context = {'form' : form, 'categories' : categories}
+
+    categories = Category.objects.all()
+
+    context = {
+        'form' : form,
+        'categories' : categories,
+        'selected_category_id' : question.category_id,
+    }
+
     return render(request, 'board/question_form.html', context)
 
 @login_required(login_url='common:login')
