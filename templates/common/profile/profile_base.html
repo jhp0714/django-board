@@ -7,7 +7,21 @@
 <div id="profile_base">
     {%if user == profile_user %}
         <div class="profile_title">이메일</div>
-        <p class="mb-4">{{ profile_user.email }}</p>
+        <p class="mb-0">{{ profile_user.email }}</p>
+
+        <a class="d-block" href="{% url 'common:change_username' %}">
+            사용자 이름 변경
+        </a>
+
+        {% if user.has_usable_password %}
+            <a class="d-block" href="{% url 'account_change_password' %}">
+                비밀번호 변경
+            </a>
+        {% else %}
+            <a class="d-block" href="{% url 'account_set_password' %}">
+                비밀번호 설정
+            </a>
+        {% endif %}
         <form action="{% url 'common:delete_account' %}" method="post">
             {% csrf_token %}
             <button type="submit" class="btn btn-danger">회원 탈퇴</button>

@@ -11,6 +11,9 @@ urlpatterns = [
     path('signup/', account_views.signup, name='signup'),
     path('delete_account/', account_views.delete_account, name='delete_account'),
 
+    # 사용자 이름 변경
+    path("profile/username/change", account_views.change_username, name="change_username"),
+
     # 비밀번호 변경
     path('password_reset/', account_views.PasswordResetView.as_view(), name='password_reset'),
     path('password_reset/done/', account_views.PasswordResetDoneView.as_view(), name='password_reset_done'),

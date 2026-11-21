@@ -11,6 +11,21 @@ class UserForm(UserCreationForm):
         model = User
         fields = ("username", "email")
 
+class UsernameChangeForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ("username",)
+        labels = {"username":"사용자 이름"}
+
+        def clean_username(self):
+            username = self.cleaned_data["username"]
+            taken = User.objects.filter(username__iexact=username).exclude(
+                pk=self.instance.pk
+            )
+            if taken.exists():
+                raise ValidationError("이미 사용 중인 사용자 이름입니다.")
+            return username
+
 class PasswordResetForm(auth_forms.PasswordResetForm):
     username = auth_forms.UsernameField(label="사용자ID")  # CharField 대신 사용
 

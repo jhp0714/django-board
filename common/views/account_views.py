@@ -1,9 +1,10 @@
 from django.contrib.auth import authenticate, login, views as auth_views
 from django.shortcuts import render, redirect
-from common.forms import UserForm, PasswordResetForm
+from common.forms import UserForm, PasswordResetForm, UsernameChangeForm
 from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from board.models import Question, Answer, Comment
+from django.db import IntegrityError, transaction
 
 def signup(request):
     """
@@ -37,6 +38,26 @@ def delete_account(request):
 
     user.delete()
     return redirect('common:login')
+
+@login_required
+def change_username(request):
+    """
+    사용자 이름 변경
+    """
+    if request.method == "POST":
+        form = UsernameChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            try:
+                with transaction.atomic():
+                    form.instance.save(update_fields=["username"])
+            except IntegrityError:
+                form.add_error("username","이미 사용 중인 사용자 이름입니다.")
+            else:
+                return redirect("common:profile_base",user_id=request.user.pk)
+    else:
+        form = UsernameChangeForm(instance=request.user)
+
+    return render(request, "common/profile/change_username.html", {"form":form})
 
 class PasswordResetView(auth_views.PasswordResetView):
     """
